@@ -54,4 +54,10 @@ public class Node {
         this.y = y;
         this.altitude = altitude;
     }
+
+    public void printer() {
+        System.out.println(name);
+        for (Node adj : adjacentNodes)
+            System.out.println("\t" + adj.name);
+    }
 }

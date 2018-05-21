@@ -27,4 +27,10 @@ public class Graph {
         return null;
     }
 
+    public void printer() {
+        for(Node node : nodes){
+            node.printer();
+            System.out.println();
+        }
+    }
 }
