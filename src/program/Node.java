@@ -56,8 +56,8 @@ public class Node {
     }
 
     public void printer() {
-        System.out.println(name);
+        System.out.println(name + " id :" + id);
         for (Node adj : adjacentNodes)
-            System.out.println("\t" + adj.name);
+            System.out.println("\t" + adj.name + " id: "+ adj.id);
     }
 }
