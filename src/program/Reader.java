@@ -9,7 +9,7 @@ import javax.xml.stream.XMLStreamReader;
 /**
  * 
  * Classe che si occupa della lettura di files in formato XML, in particolare
- * dell'archiviazione dei tags e attributes letti in un Grafo.
+ * dell'archiviazione dei tags e attributes letti in oggetti del tipo DataSet.
  * 
  * @author Just E.A.T.
  *
@@ -22,7 +22,7 @@ public class Reader {
 	 * 
 	 * Il metodo "explore" ha il compito di scorrere tutto il file XML passato come parametro
 	 * e di salvare i singoli tags e attributes nelle apposite strutture dati dell'oggetto
-	 * di tipo Graph passato come parametro.
+	 * di tipo DataSet passato come parametro.
 	 * Il metodo presenta inoltre delle chiamate al metodo println() di System.out: questa
 	 * funzionalita' ha lo scopo di stampare a console, in tempo reale, i dati che vengono letti.
 	 * 
@@ -36,7 +36,7 @@ public class Reader {
 			XMLInputFactory xmlif = XMLInputFactory.newInstance();
 	        XMLStreamReader xmlr = xmlif.createXMLStreamReader(filename, new FileInputStream(filename));
 	        
-	        Node currentNode = new Node();
+	        String temp = "";
 	        
 	        while(xmlr.hasNext()) {
 	        	
@@ -48,10 +48,6 @@ public class Reader {
 	            	
 	            case XMLStreamConstants.START_ELEMENT:
 	            	System.out.println("Tag "+ xmlr.getLocalName());
-	               	if (xmlr.getLocalName().equalsIgnoreCase("city"))
-	              		graph.addNode(currentNode);
-	               	if (xmlr.getLocalName().equalsIgnoreCase("link to"))
-	               		//To be implemented
 	            	break;
 	            	
 	            case XMLStreamConstants.NOTATION_DECLARATION:
@@ -59,10 +55,17 @@ public class Reader {
 	            	break;
 	            	
 	            case XMLStreamConstants.CHARACTERS:
-	            	if(xmlr.getText().trim().length() > 0) {
+	            	if(xmlr.getText().trim().length() > 0)
 	            		System.out.println("-> "+ xmlr.getText());
-	            		graph.addRowElement(xmlr.getText(), temp);
-	            	}	
+	            	break;
+	            	
+	            case XMLStreamConstants.ATTRIBUTE:
+	            	if(xmlr.getText().trim().length() > 0)
+	            		for (int i = 0; i < xmlr.getAttributeCount(); i++) {
+	            			System.out.println(xmlr.getAttributeLocalName(i));
+	            			System.out.println(xmlr.getAttributeValue(i));
+	            		}
+	            		System.out.println("-> "+ xmlr.getText());
 	            	break;
 	            	
 	            default:

@@ -10,7 +10,7 @@ public class Main {
 		
 		xml_reader.explore(citiesGraph, "PgAr_Map_5.xml");
 		
-		xml_writer.writeWithoutFormatting(citiesGraph, "PgAr_Map_5_OUTPUT.xml");
+		//xml_writer.writeWithoutFormatting(citiesGraph, "PgAr_Map_5_OUTPUT.xml");
 		
 	}
 
