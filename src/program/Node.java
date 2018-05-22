@@ -11,8 +11,7 @@ public class Node {
     private int id;
     private List<Node> adjacentNodes = new LinkedList<>();
 
-
-    public Node(String name, double x, double y, double altitude, int id) {
+	public Node(String name, double x, double y, double altitude, int id) {
         this.name = name;
         this.x = x;
         this.y = y;
@@ -56,8 +55,12 @@ public class Node {
     }
 
     public void printer() {
-        System.out.println(name + " id :" + id);
+        System.out.println(name + " id: " + id);
         for (Node adj : adjacentNodes)
             System.out.println("\t" + adj.name + " id: "+ adj.id);
     }
+    
+    public List<Node> getAdjacentNodes() {
+		return adjacentNodes;
+	}
 }

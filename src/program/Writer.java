@@ -12,9 +12,7 @@ import javax.xml.stream.XMLStreamWriter;
  *
  */
 public class Writer {
-	
-	public Writer() {}
-	
+		
 	/**
 	 * Metodo che stampa il file senza alterarne la formattazione originale (scarsa utilita')
 	 * 
@@ -22,25 +20,28 @@ public class Writer {
 	 * @param filename
 	 * @return
 	 */
-	public boolean writeWithoutFormatting(Graph graph, String filename) {
+	public boolean write(Graph graph, String filename, String... teamNames) {
 		
 		System.out.println("Writing in process...");
 		XMLOutputFactory output = XMLOutputFactory.newInstance();
 		XMLStreamWriter writer;
 		
 		try {
+			
 			writer = output.createXMLStreamWriter(new FileWriter(filename));
 
 			writer.writeStartDocument("utf-8","1.0");
 			
-			for(int i = 0; i < graph.elements.get(0).size(); i++) {
-				for(int j = 0; j < graph.tags.size(); j++) {
-					writer.writeStartElement(graph.tags.get(j));
-					if (!graph.elements.get(j).isEmpty())
-						writer.writeCharacters(graph.elements.get(j).get(i));
-					writer.writeEndElement();
-				}				
-			}
+			writer.writeStartElement("routes"); //Start routes
+			
+			writer.writeStartElement("route"); //Start route
+			
+			
+			for(Node node: graph.getNodes())
+				for(int i = 0; i < graph.getNodes().size(); i++)
+					writer.writeAttribute("id", Integer.toString(graph.getNodes().get(i).getId())); //Da verificare
+								
+			writer.writeEndElement(); //End route
 			
 			writer.writeEndDocument();
 			writer.flush();
@@ -48,12 +49,15 @@ public class Writer {
 			
 			System.out.println("End");
 			
-		} catch (Exception e) {
+		}
+		
+		catch (Exception e) {
 			
 			System.out.print("Error");
 			e.printStackTrace();
 			return false;
 		}
+		
 		return true;
 	}
 }
