@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		Graph graph = new Graph();
-		Utility.read("PgAr_Map_50.xml", graph);
+		Utility.read("PgAr_Map_2000.xml", graph);
 		graph.printer();
 		
 		graph.linkNodes();
@@ -26,7 +26,16 @@ public class Main {
         		baseCamp = node;
         	}
         }
-               
+        
+        Node rovineM = new Node(-1);
+        Node rovineT = new Node(-1);
+        dijkstra.shortestPath(graph, baseCamp, teams[0]);
+        System.out.println(graph.getNodes().get(graph.getNodes().size()-1).getName());
+        System.out.println(graph.getNodes().get(graph.getNodes().size()-1).getDistanceFromRoot());
+        dijkstra.shortestPath(graph, baseCamp, teams[1]);
+        System.out.println(graph.getNodes().get(graph.getNodes().size()-1).getName());
+        System.out.println(graph.getNodes().get(graph.getNodes().size()-1).getDistanceFromRoot());
+        
 //        Node rovineT= dijkstra.shortestPath(graph, baseCamp, teams[1]);
         
 //        System.out.println();

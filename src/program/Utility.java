@@ -8,6 +8,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 
@@ -71,6 +73,7 @@ public class Utility {
                 
                 xmlr.next();
             }
+            Collections.sort(graph.getNodes());
         }
         
         catch(Exception e){
