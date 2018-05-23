@@ -1,9 +1,10 @@
 package program;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Node {
+public class Node implements Comparable<Node>{
 	
     private String name;
     
@@ -12,8 +13,9 @@ public class Node {
     private double altitude;
     private int id;
     
-    private double distanceFromRoot = Double.MAX_VALUE; 
-    private List<Node> adjacentNodes = new LinkedList<>();
+    private List<Node> previousNodes = new ArrayList<>();
+    private double distanceFromRoot = Double.POSITIVE_INFINITY; 
+	private List<Node> adjacentNodes = new LinkedList<>();
 
 	public Node(String name, double x, double y, double altitude, int id) {
         this.name = name;
@@ -76,5 +78,18 @@ public class Node {
 		this.distanceFromRoot = distanceFromRoot;
 	}
 
+	public List<Node> getPreviousNodes() {
+		return previousNodes;
+	}
+
+	public void addPreviousNode(Node previousNode) {
+		previousNodes.add(previousNode);
+	}
+	
+	public int compareTo(Node node) {
+		if(id < node.id)
+			return -1;
+		else return 1;
+	}
 
 }
