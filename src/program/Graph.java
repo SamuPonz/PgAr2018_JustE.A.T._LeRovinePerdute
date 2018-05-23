@@ -1,14 +1,14 @@
 package program;
 
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Graph {
 
 	private LinkedList<Node> nodes = new LinkedList<>();
 	private LinkedList<Edge> edges = new LinkedList<>();
-    private LinkedList<Integer> idList = new LinkedList<>();
 
-    public Graph() {
+	public Graph() {
 
     }
 
@@ -27,6 +27,14 @@ public class Graph {
         }
         return null;
     }
+    
+    public Edge searchEdge(Node from, Node to) {
+		for(Edge edge : edges) {
+			if(edge.getFrom().equals(from) && edge.getTo().equals(to))
+				return edge;
+		}
+		return null;
+	}
     
     public void printer() {
         for(Node node : nodes) {
@@ -47,8 +55,13 @@ public class Graph {
 			System.out.println(edge.getFrom().getId() + "\t" + edge.getTo().getId() + "\t" + edge.getWeightMetztli() + "\t" + edge.getWeightTonatiuh());
 	}
 	
+	
 	public LinkedList<Node> getNodes() {
 		return nodes;
 	}
 
+
+    public LinkedList<Edge> getEdges() {
+		return edges;
+	}
 }
