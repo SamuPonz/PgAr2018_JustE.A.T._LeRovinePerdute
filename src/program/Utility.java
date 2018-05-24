@@ -81,7 +81,7 @@ public class Utility {
 	 * @param filename
 	 * @return
 	 */
-	public static void write(ArrayList<Node> metztli, ArrayList<Node> tonatiuh, String filename, String[] teamNames) {
+	public static void write(ArrayList<Node> tonatiuh, ArrayList<Node> metztli, String filename, String[] teamNames) {
 
 		System.out.println("Writing in process...");
 		XMLOutputFactory output = XMLOutputFactory.newInstance();

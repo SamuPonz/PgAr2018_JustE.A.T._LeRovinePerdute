@@ -21,12 +21,11 @@ public class Main {
 
         Dijkstra dijkstra = new Dijkstra(graph);
 
-        Collections.copy( tonatiuh, dijkstra.shortestPath(graph.searchNode(0), teams[0]));
+        tonatiuh.addAll( dijkstra.shortestPath(graph.searchNode(0), teams[0]));
 
-        Collections.copy( metztli, dijkstra.shortestPath(graph.searchNode(0), teams[1]));
+        metztli.addAll(dijkstra.shortestPath(graph.searchNode(0), teams[1]));
         System.out.println(metztli.size() + "\n" + tonatiuh.size());
-//        Utility.write(tonatiuh, metztli, "PgAr_Map_10000_OUTPUT.xml", teams);
-
+        Utility.write(tonatiuh, metztli, "PgAr_Map_10000_OUTPUT.xml", teams);
 	}
 
 }

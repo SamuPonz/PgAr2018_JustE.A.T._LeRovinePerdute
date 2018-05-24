@@ -34,7 +34,6 @@ public class Dijkstra {
 		int tempID = 0;
 		Node currentNode = null;
 
-
 		while(!uncheckedNodes.isEmpty()) {
 			currentNode = nearestNodeFromRoot(uncheckedNodes);
 			uncheckedNodes.remove(currentNode);
@@ -48,11 +47,12 @@ public class Dijkstra {
 				else if (vehicle.equals("Tonatiuh")) {
 					finalDistance = currentNode.getDistanceFromRoot() + currentNode.searchEdge(currentAdjNode).getWeightTonatiuh();
 				}
+				nodesFromRoot = currentNode.getNodesFromRoot()+1;
 				if(finalDistance < currentAdjNode.getDistanceFromRoot()) {
 					tempID = currentAdjNode.getId();
 					currentAdjNode.setDistanceFromRoot(finalDistance);
 					currentAdjNode.setPreviousNode(currentNode);
-					currentAdjNode.setNodesFromRoot(currentAdjNode.getPreviousNode().getNodesFromRoot()+1);
+					currentAdjNode.setNodesFromRoot(nodesFromRoot);
 				}
 				else if(finalDistance == currentAdjNode.getDistanceFromRoot()) {
 					if (nodesFromRoot < currentAdjNode.getNodesFromRoot()) {
@@ -60,6 +60,7 @@ public class Dijkstra {
 						currentAdjNode.setDistanceFromRoot(finalDistance);
 						currentAdjNode.setNodesFromRoot(nodesFromRoot);
 						currentAdjNode.setPreviousNode(currentNode);
+
 					}
 					else if (nodesFromRoot == currentAdjNode.getNodesFromRoot()){
 						if (currentAdjNode.getPreviousNode().getId() < tempID) {
