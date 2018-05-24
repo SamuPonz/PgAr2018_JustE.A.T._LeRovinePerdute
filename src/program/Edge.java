@@ -41,5 +41,9 @@ public class Edge {
     public Node getTo() {
         return to;
     }
+
+    public void printer() {
+        System.out.println("From: " + from.getId() + " to: " + to.getId());
+    }
     
 }

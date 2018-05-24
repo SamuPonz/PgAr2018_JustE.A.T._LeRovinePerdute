@@ -46,25 +46,14 @@ public class Utility {
                         x = Double.valueOf(xmlr.getAttributeValue(null, "x"));
                         y = Double.valueOf(xmlr.getAttributeValue(null, "y"));
                         h = Double.valueOf(xmlr.getAttributeValue(null, "h"));
-                        node = graph.searchNode(id);
-                        
-                        if (node == null) {
-                        	graph.addNode(new Node(name, x, y, h, id));
-                            node = graph.searchNode(id);
-                        }
-                        else
-                        	node.init(name, x , y, h);
+                        node = graph.addNode(new Node(name, x, y, h, id));
+
                 	}
                     
                 	if(xmlr.getLocalName().equals("link")) {
-                		
                 		id = Integer.valueOf(xmlr.getAttributeValue(null, "to"));
-                        if (graph.searchNode(id) == null) {
-                        	graph.addNode(new Node(id));
-                        }
-                        node.addAdjacentNodes(graph.searchNode(id));
-                    }
-                	
+                		node.addAdjacentNodes(id);
+                	}
                     break;
                     
                 default:
@@ -110,7 +99,6 @@ public class Utility {
 			for(Node node: graph.getNodes())
 				for(int i = 0; i < graph.getNodes().size(); i++)
 					writer.writeAttribute("id", Integer.toString(graph.getNodes().get(i).getId())); //Da verificare
-								
 			writer.writeEndElement(); //End route
 			
 			writer.writeEndDocument();

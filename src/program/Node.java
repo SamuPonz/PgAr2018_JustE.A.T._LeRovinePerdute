@@ -1,5 +1,6 @@
 package program;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,10 +13,12 @@ public class Node implements Comparable<Node>{
     private double y;
     private double altitude;
     private int id;
-    
+    private List<Integer> adjacentNodes = new ArrayList<>();
+
+
     private List<Node> previousNodes = new ArrayList<>();
     private double distanceFromRoot = Double.POSITIVE_INFINITY; 
-	private List<Node> adjacentNodes = new LinkedList<>();
+	private List<Edge> edges = new ArrayList<>();
 
 	public Node(String name, double x, double y, double altitude, int id) {
         this.name = name;
@@ -49,24 +52,17 @@ public class Node implements Comparable<Node>{
         return id;
     }
 
-    public void addAdjacentNodes(Node adj) {
+    public void addAdjacentNodes(int adj) {
         adjacentNodes.add(adj);
-    }
-
-    public void init(String name, double x, double y, double altitude) {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.altitude = altitude;
     }
 
     public void printer() {
         System.out.println(name + " id: " + id);
-        for (Node adj : adjacentNodes)
-            System.out.println("\t" + adj.name + " id: "+ adj.id);
+        for (Integer adj : adjacentNodes)
+            System.out.println("\t" +adj);
     }
     
-    public List<Node> getAdjacentNodes() {
+    public List<Integer> getAdjacentNodes() {
 		return adjacentNodes;
 	}
 
@@ -92,4 +88,31 @@ public class Node implements Comparable<Node>{
 		else return 1;
 	}
 
+    public void setEdges(Node from, ArrayList<Node> adjs) {
+        for(Node to : adjs){
+           edges.add(new Edge(from, to));
+        }
+    }
+
+    public void printEdges() {
+        for (Edge edge: edges)
+            edge.printer();
+    }
+
+
+    public List<Node> getAdj() {
+	    List<Node> adjacents =new ArrayList<>();
+	    for (Edge edge : edges){
+	        adjacents.add(edge.getTo());
+        }
+        return adjacents;
+    }
+
+    public Edge searchEdge(Node to){
+	    for(Edge edge: edges){
+	        if (to == edge.getTo())
+	            return edge;
+	    }
+	    return null;
+    }
 }

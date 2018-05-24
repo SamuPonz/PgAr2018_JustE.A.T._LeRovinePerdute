@@ -1,67 +1,47 @@
 package program;
 
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Graph {
 
-	private LinkedList<Node> nodes = new LinkedList<>();
-	private LinkedList<Edge> edges = new LinkedList<>();
+    private ArrayList<Node> nodes = new ArrayList<>();
 
-	public Graph() {
 
-    }
-
-    public void addNode(Node newNode) {
+    public Node addNode(Node newNode) {
         nodes.add(newNode);
+        return newNode;
     }
 
-    public void addEdge(Node from, Node to) {
-        edges.add(new Edge(from, to));
-    }
-
-    public Node searchNode(int id) {
-        for (Node element : nodes){
-            if(element.getId() == id)
-                return element;
-        }
-        return null;
-    }
-    
-    public Edge searchEdge(Node from, Node to) {
-		for(Edge edge : edges) {
-			if(edge.getFrom().equals(from) && edge.getTo().equals(to))
-				return edge;
-		}
-		return null;
-	}
-    
     public void printer() {
-        for(Node node : nodes) {
+        for (Node node : nodes) {
             node.printer();
             System.out.println();
         }
     }
-    
-    public void linkNodes() {
-    	for(Node node: nodes)
-    		for(int i = 0; i < node.getAdjacentNodes().size(); i++)
-    			addEdge(node, node.getAdjacentNodes().get(i));
+
+    public ArrayList<Node> getNodes() {
+        return nodes;
     }
 
-    //Serve per utilità, per stampare quali edges sono stati creati
-	public void printEdges() {
-		for(Edge edge: edges)
-			System.out.println(edge.getFrom().getId() + "\t" + edge.getTo().getId() + "\t" + edge.getWeightMetztli() + "\t" + edge.getWeightTonatiuh());
-	}
-	
-	
-	public LinkedList<Node> getNodes() {
-		return nodes;
-	}
+    public void setEdges() {
+        for(Node node : nodes){
+            ArrayList<Node> adjs = new ArrayList<>();
+            for (Integer adj : node.getAdjacentNodes()){
+                adjs.add(searchNode(adj));
+            }
+            node.setEdges(node, adjs);
+        }
+    }
 
+    public Node searchNode(int id){
+        return nodes.get(id);
+    }
 
-    public LinkedList<Edge> getEdges() {
-		return edges;
-	}
+    public void printEdges() {
+        for (Node node : nodes)
+            node.printEdges();
+    }
 }
+
