@@ -63,8 +63,7 @@ public class Dijkstra {
 
 					}
 					else if (nodesFromRoot == currentAdjNode.getNodesFromRoot()){
-						if (currentAdjNode.getPreviousNode().getId() > tempID) {
-							tempID = currentAdjNode.getId();
+						if (currentAdjNode.getPreviousNode().getId() < currentNode.getId()) {
 							currentAdjNode.setDistanceFromRoot(finalDistance);
 							currentAdjNode.setNodesFromRoot(nodesFromRoot);
 							currentAdjNode.setPreviousNode(currentNode);
