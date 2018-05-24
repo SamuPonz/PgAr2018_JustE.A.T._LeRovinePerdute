@@ -64,6 +64,7 @@ public class Utility {
                 xmlr.next();
             }
             Collections.sort(graph.getNodes());
+            graph.setEdges();
         }
         
         catch(Exception e){
@@ -81,7 +82,8 @@ public class Utility {
 	 * @param filename
 	 * @return
 	 */
-	public static void write(ArrayList<Node> tonatiuh, ArrayList<Node> metztli, String filename, String[] teamNames) {
+    
+	public static void write(ArrayList<Node> tonatiuh, Double tonatiuhCost, ArrayList<Node> metztli, Double metztliCost, String filename, String[] teamNames) {
 
 		System.out.println("Writing in process...");
 		XMLOutputFactory output = XMLOutputFactory.newInstance();
@@ -97,7 +99,7 @@ public class Utility {
 			writer.writeStartElement("route"); //Start route
 
 			writer.writeAttribute("team", teamNames[0]);
-			writer.writeAttribute("cost", Double.toString(tonatiuh.get(tonatiuh.size()-1).getDistanceFromRoot()));
+			writer.writeAttribute("cost", Double.toString(tonatiuhCost));
 			writer.writeAttribute("cities", Integer.toString(tonatiuh.size()));
 
 			for(int i = 0; i < tonatiuh.size(); i++) {
@@ -110,7 +112,7 @@ public class Utility {
 
 			writer.writeStartElement("route"); //Start route
 			writer.writeAttribute("team", teamNames[1]);
-			writer.writeAttribute("cost", Double.toString(metztli.get(metztli.size()-1).getDistanceFromRoot()));
+			writer.writeAttribute("cost", Double.toString(metztliCost));
 			writer.writeAttribute("cities", Integer.toString(metztli.size()));
 
 			for(int i = 0; i < metztli.size(); i++) {

@@ -47,7 +47,7 @@ public class Dijkstra {
 				else if (vehicle.equals("Tonatiuh")) {
 					finalDistance = currentNode.getDistanceFromRoot() + currentNode.searchEdge(currentAdjNode).getWeightTonatiuh();
 				}
-				nodesFromRoot = currentNode.getNodesFromRoot()+1;
+				nodesFromRoot = currentNode.getNodesFromRoot() + 1;
 				if(finalDistance < currentAdjNode.getDistanceFromRoot()) {
 					tempID = currentAdjNode.getId();
 					currentAdjNode.setDistanceFromRoot(finalDistance);
@@ -63,7 +63,7 @@ public class Dijkstra {
 
 					}
 					else if (nodesFromRoot == currentAdjNode.getNodesFromRoot()){
-						if (currentAdjNode.getPreviousNode().getId() < tempID) {
+						if (currentAdjNode.getPreviousNode().getId() > tempID) {
 							tempID = currentAdjNode.getId();
 							currentAdjNode.setDistanceFromRoot(finalDistance);
 							currentAdjNode.setNodesFromRoot(nodesFromRoot);
@@ -86,8 +86,10 @@ public class Dijkstra {
 				if(node.getNodesFromRoot() < nearestNode.getNodesFromRoot()) {
 					nearestNode = node;
 				}
-				else if(node.getId() > nearestNode.getId())
+				else if(node.getNodesFromRoot() == nearestNode.getNodesFromRoot()) {
+					if(node.getId() > nearestNode.getId())
 					nearestNode = node;
+				}
 			}
 		}
 		return nearestNode;
