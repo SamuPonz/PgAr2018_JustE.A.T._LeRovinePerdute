@@ -3,11 +3,26 @@ package program;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * Classe che rappresenta un prototipo dell' oggetto su cui vengono richiamati i metodi che elaborano i dai presi in input
+ * 
+ * @author Just E.A.T.
+ *
+ */
+
 public class Dijkstra {
 
     private Graph graph = null;
     private Node baseCamp = null;
     private Node ruins = null;
+    
+    /**
+     * 
+     * Costruttore
+     * 
+     * @param graph Grafo, ossia la mappa delle citta', su cui agiscono i metodi
+     */
 
     public Dijkstra(Graph graph) {
         this.graph = graph;
@@ -15,6 +30,15 @@ public class Dijkstra {
         ruins = graph.searchNode(graph.getNodes().size()-1);
     }
  	
+    /**
+     * 
+     * Metodo che applica l'algoritmo di Dijkstra 
+     * 
+     * @param root Citta' da cui partire, campo base
+     * @param vehicle veicolo della squadra di esploratori
+     * @return Lista delle citta' da percorrere per arrivare alla destinazione con meno costi possibili
+     */
+    
 	public ArrayList<Node> shortestPath(Node root, String vehicle) {
 		ArrayList<Node> notUsed;
 		ArrayList<Node> uncheckedNodes = new ArrayList<>();
@@ -85,6 +109,15 @@ public class Dijkstra {
 		}
 		return buildPath();
 	}
+	
+	/**
+	 * 
+	 * Metodo che restituisce la citta' più vicina al campo base.
+	 * Controlla la distanza, a parita' di distanza il numero di citta' attraversate e a parita' di citta' attraversate controlla quella con id maggiore.
+	 * 
+	 * @param uncheckedNodes Insieme di citta' da confrontare
+	 * @return Citta' piu' vicina
+	 */
 
 	public Node nearestNodeFromRoot(ArrayList<Node> uncheckedNodes) {
 		Node nearestNode = new Node(-1);
@@ -105,6 +138,13 @@ public class Dijkstra {
 		return nearestNode;
 	}
 
+	/**
+	 * 
+	 * Metodo che ricostruisce il cammino minimo dal campo base alle rovine
+	 * 
+	 * @return Lista di citta' che compongono il cammino minimo dal campo base alle rovine
+	 */
+	
     private ArrayList<Node> buildPath() {
         boolean finished = false;
         ArrayList<Node> path = new ArrayList<>();

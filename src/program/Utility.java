@@ -22,7 +22,13 @@ import java.util.List;
  */
 public class Utility {
 	
-    //LEGGE DAL FILE SOLO I TAG CHE CI INTERESSANO E SALVA I VALORI
+    /**
+     * Metodo che legge i file in formato xml
+     * 
+     * @param fileName Nome del file
+     * @param graph Istanza della classe grafo da sovrascrivere con i valori letti con il metodo read
+     */
+	
     public static void read(String fileName, Graph graph) {
         int id;
         String name;
@@ -72,14 +78,16 @@ public class Utility {
         }
     }
 
-
 	/**
-	 * Metodo che stampa il file secondo il formato richiesto
-	 *
-	 * @param metztli
-	 * @param tonatiuh
-	 * @param filename
-	 * @return
+	 * 
+	 * Metodo che stampa file in formato xml, formattati in modo corretto
+	 * 
+	 * @param tonatiuh ArrayList di Nodi del percorso ottimale del veicolo Tonatiuh
+	 * @param tonatiuhCost Carburante richiesto dal veicolo Tonatiuh
+	 * @param metztli ArrayList di Nodi del percorso ottimale del veicolo Metztli
+	 * @param metztliCost Carburante richiesto dal veicolo Metztli
+	 * @param filename Nome del file da produrre
+	 * @param teamNames Array di stringhe contenente i nomi delle squadre di esplorazione
 	 */
     
 	public static void write(ArrayList<Node> tonatiuh, Double tonatiuhCost, ArrayList<Node> metztli, Double metztliCost, String filename, String[] teamNames) {
