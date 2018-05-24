@@ -1,8 +1,6 @@
 package program;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Node implements Comparable<Node>{
@@ -16,9 +14,10 @@ public class Node implements Comparable<Node>{
     private List<Integer> adjacentNodes = new ArrayList<>();
 
 
-    private List<Node> previousNodes = new ArrayList<>();
-    private double distanceFromRoot = Double.POSITIVE_INFINITY; 
-	private List<Edge> edges = new ArrayList<>();
+    private Node previousNode;
+    private double distanceFromRoot = Double.POSITIVE_INFINITY;
+    private int nodesFromRoot;
+    private List<Edge> edges = new ArrayList<>();
 
 	public Node(String name, double x, double y, double altitude, int id) {
         this.name = name;
@@ -74,12 +73,12 @@ public class Node implements Comparable<Node>{
 		this.distanceFromRoot = distanceFromRoot;
 	}
 
-	public List<Node> getPreviousNodes() {
-		return previousNodes;
+	public Node getPreviousNode() {
+		return previousNode;
 	}
 
-	public void addPreviousNode(Node previousNode) {
-		previousNodes.add(previousNode);
+	public void setPreviousNode(Node previousNode) {
+		this.previousNode =previousNode;
 	}
 	
 	public int compareTo(Node node) {
@@ -114,5 +113,13 @@ public class Node implements Comparable<Node>{
 	            return edge;
 	    }
 	    return null;
+    }
+
+    public void setNodesFromRoot(int nodesFromRoot) {
+        this.nodesFromRoot = nodesFromRoot;
+    }
+
+    public int getNodesFromRoot() {
+        return nodesFromRoot;
     }
 }

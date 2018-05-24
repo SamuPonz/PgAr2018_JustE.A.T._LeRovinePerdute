@@ -8,6 +8,7 @@ import javax.xml.stream.XMLStreamWriter;
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -70,47 +71,67 @@ public class Utility {
             System.err.println(e.getMessage());
         }
     }
-    
-    
-    /**
-	 * Metodo che stampa il file senza alterarne la formattazione originale (scarsa utilita')
-	 * 
-	 * @param graph
+
+
+	/**
+	 * Metodo che stampa il file secondo il formato richiesto
+	 *
+	 * @param metztli
+	 * @param tonatiuh
 	 * @param filename
 	 * @return
 	 */
-	public static void write(Graph graph, String filename, String[] teamNames) {
-		
+	public static void write(ArrayList<Node> metztli, ArrayList<Node> tonatiuh, String filename, String[] teamNames) {
+
 		System.out.println("Writing in process...");
 		XMLOutputFactory output = XMLOutputFactory.newInstance();
 		XMLStreamWriter writer;
-		
+
 		try {
-			
+
 			writer = output.createXMLStreamWriter(new FileWriter(filename));
 
 			writer.writeStartDocument("utf-8","1.0");
-			
-			writer.writeStartElement("routes"); //Start routes
-			
+
+			writer.writeStartElement("solution"); //Start solution
 			writer.writeStartElement("route"); //Start route
-			
-			
-			for(Node node: graph.getNodes())
-				for(int i = 0; i < graph.getNodes().size(); i++)
-					writer.writeAttribute("id", Integer.toString(graph.getNodes().get(i).getId())); //Da verificare
+
+			writer.writeAttribute("team", teamNames[0]);
+			writer.writeAttribute("cost", Double.toString(tonatiuh.get(tonatiuh.size()-1).getDistanceFromRoot()));
+			writer.writeAttribute("cities", Integer.toString(tonatiuh.size()));
+
+			for(int i = 0; i < tonatiuh.size(); i++) {
+				writer.writeEmptyElement("city");
+				writer.writeAttribute("id", Integer.toString(tonatiuh.get(i).getId()));
+				writer.writeAttribute("name", tonatiuh.get(i).getName());
+			}
+
 			writer.writeEndElement(); //End route
-			
+
+			writer.writeStartElement("route"); //Start route
+			writer.writeAttribute("team", teamNames[1]);
+			writer.writeAttribute("cost", Double.toString(metztli.get(metztli.size()-1).getDistanceFromRoot()));
+			writer.writeAttribute("cities", Integer.toString(metztli.size()));
+
+			for(int i = 0; i < metztli.size(); i++) {
+				writer.writeEmptyElement("city"); //Start city
+				writer.writeAttribute("id", Integer.toString(metztli.get(i).getId()));
+				writer.writeAttribute("name", metztli.get(i).getName());
+			}
+
+			writer.writeEndElement(); //End route
+			writer.writeEndElement(); //End solution
+
 			writer.writeEndDocument();
 			writer.flush();
 			writer.close();
-			
+
 			System.out.println("End");
-			
+
 		}
-		
+
 		catch (Exception e) {
-			
+
 			System.out.print("Error");
 			e.printStackTrace();
 		}
