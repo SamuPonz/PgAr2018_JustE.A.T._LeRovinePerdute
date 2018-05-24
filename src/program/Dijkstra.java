@@ -16,19 +16,30 @@ public class Dijkstra {
     }
  	
 	public ArrayList<Node> shortestPath(Node root, String vehicle) {
-		
+		ArrayList<Node> notUsed;
 		ArrayList<Node> uncheckedNodes = new ArrayList<>();
-		
+
 		for(Node node : graph.getNodes()) {
 			node.setDistanceFromRoot(Double.POSITIVE_INFINITY);
 			node.setNodesFromRoot(Integer.MAX_VALUE);
 			node.setPreviousNode(null);
 			uncheckedNodes.add(node);
 		}
-		
+		notUsed = new ArrayList<>(uncheckedNodes);
+
+		for(Node node : graph.getNodes()) {
+			for(Edge edge : node.getEdges()){
+				if(notUsed.contains(edge.getTo()))
+					notUsed.remove(edge.getTo());
+			}
+		}
+
+		for(Node node : notUsed) {
+			uncheckedNodes.remove(node);
+		}
+
 		root.setDistanceFromRoot(0);
 		root.setNodesFromRoot(0);
-
 		double finalDistance = 0;
 		int nodesFromRoot = 0;
 		int tempID = 0;

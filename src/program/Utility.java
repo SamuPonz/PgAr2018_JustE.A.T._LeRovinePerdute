@@ -63,7 +63,6 @@ public class Utility {
                 
                 xmlr.next();
             }
-            Collections.sort(graph.getNodes());
             graph.setEdges();
         }
         

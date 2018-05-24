@@ -122,4 +122,8 @@ public class Node implements Comparable<Node>{
     public int getNodesFromRoot() {
         return nodesFromRoot;
     }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
 }
