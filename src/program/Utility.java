@@ -93,8 +93,9 @@ public class Utility {
 			writer = output.createXMLStreamWriter(new FileWriter(filename));
 
 			writer.writeStartDocument("utf-8","1.0");
-
+			writer.writeCharacters("\n");
 			writer.writeStartElement("solution"); //Start solution
+			writer.writeCharacters("\n\t");
 			writer.writeStartElement("route"); //Start route
 
 			writer.writeAttribute("team", teamNames[0]);
@@ -102,25 +103,29 @@ public class Utility {
 			writer.writeAttribute("cities", Integer.toString(tonatiuh.size()));
 
 			for(int i = 0; i < tonatiuh.size(); i++) {
+				writer.writeCharacters("\n\t\t");
 				writer.writeEmptyElement("city");
 				writer.writeAttribute("id", Integer.toString(tonatiuh.get(i).getId()));
 				writer.writeAttribute("name", tonatiuh.get(i).getName());
 			}
-
+			writer.writeCharacters("\n\t");
 			writer.writeEndElement(); //End route
-
+			writer.writeCharacters("\n\t");
 			writer.writeStartElement("route"); //Start route
 			writer.writeAttribute("team", teamNames[1]);
 			writer.writeAttribute("cost", Double.toString(metztliCost));
 			writer.writeAttribute("cities", Integer.toString(metztli.size()));
 
 			for(int i = 0; i < metztli.size(); i++) {
+				writer.writeCharacters("\n\t\t");
 				writer.writeEmptyElement("city"); //Start city
 				writer.writeAttribute("id", Integer.toString(metztli.get(i).getId()));
 				writer.writeAttribute("name", metztli.get(i).getName());
 			}
+			writer.writeCharacters("\n\t");
 
 			writer.writeEndElement(); //End route
+			writer.writeCharacters("\n");
 			writer.writeEndElement(); //End solution
 
 			writer.writeEndDocument();

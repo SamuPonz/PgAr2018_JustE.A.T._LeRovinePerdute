@@ -14,7 +14,7 @@ public class Main {
 		ArrayList<Node> tonatiuh = new ArrayList<>();
         ArrayList<Node> metztli = new ArrayList<>();
 
-        Utility.read("PgAr_Map_10000.xml", graph);
+        Utility.read("PgAr_Map_200.xml", graph);
 
         String[] teams = {"Tonatiuh", "Metztli"};
 
@@ -28,7 +28,7 @@ public class Main {
 
         Double metztliCost = metztli.get(metztli.size()-1).getDistanceFromRoot();
         
-        Utility.write(tonatiuh, tonatiuhCost, metztli, metztliCost, "PgAr_Map_10000_OUTPUT.xml", teams);
+        Utility.write(tonatiuh, tonatiuhCost, metztli, metztliCost, "PgAr_Map_200_OUTPUT.xml", teams);
 	}
 
 }
