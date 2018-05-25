@@ -16,7 +16,7 @@ public class Graph {
 
     /**
      * 
-     * Metodo cge aggiunge un nodo al grafo
+     * Metodo che aggiunge un nodo al grafo
      * 
      * @param Nodo da aggiungere al grafo
      * @return Nodo aggiunto al grafo

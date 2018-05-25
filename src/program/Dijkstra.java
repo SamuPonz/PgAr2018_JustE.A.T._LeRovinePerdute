@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * 
- * Classe che rappresenta un prototipo dell' oggetto su cui vengono richiamati i metodi che elaborano i dai presi in input
+ * Classe che rappresenta un prototipo dell'oggetto su cui vengono richiamati i metodi che elaborano i dati presi in input
  * 
  * @author Just E.A.T.
  *

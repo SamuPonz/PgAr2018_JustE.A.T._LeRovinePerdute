@@ -91,6 +91,7 @@ public class Main {
 	/**
 	 * Metodo che permette di leggere il nome dei files presenti in una cartella e inserirli in un vettore di stringhe
 	 * 
+	 * @param folder La stringa che rappresenta la directory in cui sono salvati i files
 	 * @return menuVoices Il vettore di stringhe da passare al costruttore dell'oggetto menu', di tipo MyMenu
 	 */
 	private static String[] setMenuVoices(String folder) {

@@ -186,7 +186,7 @@ public class Node implements Comparable<Node>{
 	 */
 	
 	public void setPreviousNode(Node previousNode) {
-		this.previousNode =previousNode;
+		this.previousNode = previousNode;
 	}
 	
 	/**
@@ -227,7 +227,7 @@ public class Node implements Comparable<Node>{
     }
     
     public List<Node> getAdj() {
-	    List<Node> adjacents =new ArrayList<>();
+	    List<Node> adjacents = new ArrayList<>();
 	    for (Edge edge : edges){
 	        adjacents.add(edge.getTo());
         }
@@ -252,7 +252,7 @@ public class Node implements Comparable<Node>{
 
     /**
      * 
-     * Metodo che modifica il numero di citta' che preceodono la citta' nel cammino ottimale
+     * Metodo che modifica il numero di citta' che precedono la citta' nel cammino ottimale
      * 
      * @param Numero di citta' che preceodono la citta' nel cammino ottimale 
      */
