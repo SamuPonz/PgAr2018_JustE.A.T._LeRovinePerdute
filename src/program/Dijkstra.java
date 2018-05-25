@@ -31,7 +31,6 @@ public class Dijkstra {
 
 		double finalDistance = 0;
 		int nodesFromRoot = 0;
-		int tempID = 0;
 		Node currentNode = null;
 
 		while(!uncheckedNodes.isEmpty()) {
@@ -49,14 +48,12 @@ public class Dijkstra {
 				}
 				nodesFromRoot = currentNode.getNodesFromRoot() + 1;
 				if(finalDistance < currentAdjNode.getDistanceFromRoot()) {
-					tempID = currentAdjNode.getId();
 					currentAdjNode.setDistanceFromRoot(finalDistance);
 					currentAdjNode.setPreviousNode(currentNode);
 					currentAdjNode.setNodesFromRoot(nodesFromRoot);
 				}
 				else if(finalDistance == currentAdjNode.getDistanceFromRoot()) {
 					if (nodesFromRoot < currentAdjNode.getNodesFromRoot()) {
-						tempID = currentAdjNode.getId();
 						currentAdjNode.setDistanceFromRoot(finalDistance);
 						currentAdjNode.setNodesFromRoot(nodesFromRoot);
 						currentAdjNode.setPreviousNode(currentNode);
