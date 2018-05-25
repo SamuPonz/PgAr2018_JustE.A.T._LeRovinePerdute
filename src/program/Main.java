@@ -10,12 +10,24 @@ import java.util.*;
 
 import it.unibs.fp.mylib.MyMenu;
 
+/**
+ * Classe contenente il main
+ * 
+ * @author Just E.A.T.
+ *
+ */
 public class Main {
 	
 	private final static String TITLE = "Select a file to read";
 	private final static String READING_FROM_DIRECTORY = "Reading files from the following directory: %s";
 	private final static String END_MESSAGE = "Reading process complete";
 
+	/**
+	 * Metodo main: determina il flusso di esecuzione del programma e permette all'utente
+	 * di selezionare i files da leggere dalla cartella in cui sono salvati
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		String[] menuVoices = setMenuVoices();
@@ -57,6 +69,12 @@ public class Main {
 		} while (true);
 	}
 	
+	/**
+	 * Metodo che si occupa di salvare in una lista tutti i files contenuti in una cartella
+	 * 
+	 * @param directory La directory in cui cercare i file
+	 * @return filenames La lista dei files nella directory
+	 */
 	private static List<String> fileList(String directory) {
         List<String> fileNames = new Vector<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
@@ -67,6 +85,11 @@ public class Main {
         return fileNames;
     }
 	
+	/**
+	 * Metodo che permette di leggere il nome dei files presenti in una cartella e inserirli in un vettore di stringhe
+	 * 
+	 * @return menuVoices Il vettore di stringhe da passare al costruttore dell'oggetto menu', di tipo MyMenu
+	 */
 	private static String[] setMenuVoices() {
 		File file = new File(System.getProperty("user.dir"), "Files");
         String folder = file.getAbsolutePath();
@@ -75,7 +98,7 @@ public class Main {
         
         String[] menuVoices = new String[fileList(folder).size()];
         menuVoices = fileList(folder).toArray(menuVoices);
-        
+
         return menuVoices;
 	}
 

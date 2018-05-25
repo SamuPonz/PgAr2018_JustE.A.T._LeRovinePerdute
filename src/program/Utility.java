@@ -6,12 +6,9 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * 
@@ -23,7 +20,13 @@ import java.util.List;
  */
 public class Utility {
 	
-    //LEGGE DAL FILE SOLO I TAG CHE CI INTERESSANO E SALVA I VALORI
+    /**
+     * Metodo che legge i file in formato xml
+     * 
+     * @param fileName Nome del file
+     * @param graph Istanza della classe grafo da sovrascrivere con i valori letti con il metodo read
+     */
+	
     public static void read(String fileName, Graph graph) {
         int id;
         String name;
@@ -64,7 +67,6 @@ public class Utility {
                 
                 xmlr.next();
             }
-            Collections.sort(graph.getNodes());
             graph.setEdges();
         }
         
@@ -74,14 +76,16 @@ public class Utility {
         }
     }
 
-
 	/**
-	 * Metodo che stampa il file secondo il formato richiesto
-	 *
-	 * @param metztli
-	 * @param tonatiuh
-	 * @param filename
-	 * @return
+	 * 
+	 * Metodo che stampa file in formato xml, formattati in modo corretto
+	 * 
+	 * @param tonatiuh ArrayList di Nodi del percorso ottimale del veicolo Tonatiuh
+	 * @param tonatiuhCost Carburante richiesto dal veicolo Tonatiuh
+	 * @param metztli ArrayList di Nodi del percorso ottimale del veicolo Metztli
+	 * @param metztliCost Carburante richiesto dal veicolo Metztli
+	 * @param filename Nome del file da produrre
+	 * @param teamNames Array di stringhe contenente i nomi delle squadre di esplorazione
 	 */
     
 	public static void write(ArrayList<Node> tonatiuh, Double tonatiuhCost, ArrayList<Node> metztli, Double metztliCost, String filename, String[] teamNames) {
@@ -95,8 +99,9 @@ public class Utility {
 			writer = output.createXMLStreamWriter(new FileWriter(filename));
 
 			writer.writeStartDocument("utf-8","1.0");
-
+			writer.writeCharacters("\n");
 			writer.writeStartElement("solution"); //Start solution
+			writer.writeCharacters("\n\t");
 			writer.writeStartElement("route"); //Start route
 
 			writer.writeAttribute("team", teamNames[0]);
@@ -104,25 +109,29 @@ public class Utility {
 			writer.writeAttribute("cities", Integer.toString(tonatiuh.size()));
 
 			for(int i = 0; i < tonatiuh.size(); i++) {
+				writer.writeCharacters("\n\t\t");
 				writer.writeEmptyElement("city");
 				writer.writeAttribute("id", Integer.toString(tonatiuh.get(i).getId()));
 				writer.writeAttribute("name", tonatiuh.get(i).getName());
 			}
-
+			writer.writeCharacters("\n\t");
 			writer.writeEndElement(); //End route
-
+			writer.writeCharacters("\n\t");
 			writer.writeStartElement("route"); //Start route
 			writer.writeAttribute("team", teamNames[1]);
 			writer.writeAttribute("cost", Double.toString(metztliCost));
 			writer.writeAttribute("cities", Integer.toString(metztli.size()));
 
 			for(int i = 0; i < metztli.size(); i++) {
+				writer.writeCharacters("\n\t\t");
 				writer.writeEmptyElement("city"); //Start city
 				writer.writeAttribute("id", Integer.toString(metztli.get(i).getId()));
 				writer.writeAttribute("name", metztli.get(i).getName());
 			}
+			writer.writeCharacters("\n\t");
 
 			writer.writeEndElement(); //End route
+			writer.writeCharacters("\n");
 			writer.writeEndElement(); //End solution
 
 			writer.writeEndDocument();
