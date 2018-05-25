@@ -30,7 +30,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 
-		String[] menuVoices = setMenuVoices();
+		File file = new File(System.getProperty("user.dir"), "InputFiles");
+        String folder = file.getAbsolutePath();
+        
+		String[] menuVoices = setMenuVoices(folder);
 		
 		MyMenu menu = new MyMenu(TITLE, menuVoices, TITLE.length());
 		
@@ -52,7 +55,7 @@ public class Main {
 			ArrayList<Node> tonatiuh = new ArrayList<>();
 			ArrayList<Node> metztli = new ArrayList<>();
 
-        	Utility.read(chosenFile, graph);
+        	Utility.read((folder + "\\" + chosenFile), graph);
 
         	Dijkstra dijkstra = new Dijkstra(graph);
 
@@ -79,7 +82,7 @@ public class Main {
         List<String> fileNames = new Vector<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(directory))) {
             for (Path path : directoryStream) {
-                fileNames.add(path.toString());
+                fileNames.add(path.toFile().getName());
             }
         } catch (IOException ex) {}
         return fileNames;
@@ -90,10 +93,8 @@ public class Main {
 	 * 
 	 * @return menuVoices Il vettore di stringhe da passare al costruttore dell'oggetto menu', di tipo MyMenu
 	 */
-	private static String[] setMenuVoices() {
-		File file = new File(System.getProperty("user.dir"), "Files");
-        String folder = file.getAbsolutePath();
-        
+	private static String[] setMenuVoices(String folder) {
+		
         System.out.println(String.format(READING_FROM_DIRECTORY, folder));
         
         String[] menuVoices = new String[fileList(folder).size()];
